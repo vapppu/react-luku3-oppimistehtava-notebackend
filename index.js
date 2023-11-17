@@ -9,8 +9,13 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({error: 'unknown endpoint'})
+}
+
 app.use(express.json())
 app.use(requestLogger)
+app.use(unknownEndpoint)
 
 let notes = [
     {
